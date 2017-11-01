@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyAid", "StudyAid\StudyAid.csproj", "{D21AE06C-EFCD-42F9-935A-96BB369A87C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyAidTests", "StudyAidTests\StudyAidTests.csproj", "{83458258-79EE-4D98-A649-001F7DD6BA76}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D21AE06C-EFCD-42F9-935A-96BB369A87C8} = {D21AE06C-EFCD-42F9-935A-96BB369A87C8}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyAid.TestHarness", "StudyAid.TestHarness\StudyAid.TestHarness.csproj", "{721E57A5-940D-4752-B82F-3D546A977C3C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D21AE06C-EFCD-42F9-935A-96BB369A87C8} = {D21AE06C-EFCD-42F9-935A-96BB369A87C8}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{5E593BCA-4958-42B0-80BF-858306FF41B9}"
+	ProjectSection(SolutionItems) = preProject
+		..\Docs\Requirements.xlsx = ..\Docs\Requirements.xlsx
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D21AE06C-EFCD-42F9-935A-96BB369A87C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D21AE06C-EFCD-42F9-935A-96BB369A87C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D21AE06C-EFCD-42F9-935A-96BB369A87C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D21AE06C-EFCD-42F9-935A-96BB369A87C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83458258-79EE-4D98-A649-001F7DD6BA76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83458258-79EE-4D98-A649-001F7DD6BA76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83458258-79EE-4D98-A649-001F7DD6BA76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83458258-79EE-4D98-A649-001F7DD6BA76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{721E57A5-940D-4752-B82F-3D546A977C3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{721E57A5-940D-4752-B82F-3D546A977C3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{721E57A5-940D-4752-B82F-3D546A977C3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{721E57A5-940D-4752-B82F-3D546A977C3C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A665EB6D-676E-414E-ACBA-986B416B80A1}
+	EndGlobalSection
+EndGlobal
