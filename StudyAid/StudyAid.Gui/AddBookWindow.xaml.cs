@@ -38,6 +38,15 @@ namespace StudyAid.Gui
             if(Authors.Count > 0 && !string.IsNullOrEmpty(BookTitle.Text))
             {
                 var book = new Book { Title = BookTitle.Text, Authors = Authors };
+
+                foreach (var author in Authors)
+                {
+                    if(author.AuthorId > 0)
+                    {
+                        _bookContext.Set(typeof(Author)).Attach(author);
+                    }
+                }
+
                 _bookContext.Books.Add(book);
                 _bookContext.SaveChanges();
             }

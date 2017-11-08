@@ -36,6 +36,10 @@ namespace StudyAid.Gui
             if(existingAuthor != null)
             {
                 AuthorName.Text = existingAuthor.Name;
+
+                // This doesn't appear to be necessary
+                // _bookContext.Entry(existingAuthor).State = EntityState.Detached;
+
                 _author = existingAuthor;
             }
         }
