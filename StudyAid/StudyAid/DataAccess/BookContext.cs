@@ -9,7 +9,7 @@ namespace StudyAid.DataAccess
 {
     public class BookContext : DbContext
     {
-        public BookContext() : base("name=BookConnection") { }
+        public BookContext() : base("BookConnection") { }
 
         public DbSet<Book> Books { get; set; }
         public DbSet<Author> Authors { get; set; }
