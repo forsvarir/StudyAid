@@ -7,7 +7,7 @@
         prism:ViewModelLocator.AutoWireViewModel="True"
         xmlns:local="clr-namespace:StudyAid.Gui"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Study Aid" Height="350" Width="525">
     <Grid>
         
     </Grid>
