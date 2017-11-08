@@ -9,6 +9,18 @@
         mc:Ignorable="d"
         Title="Study Aid" Height="350" Width="525">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_Program">
+                    <MenuItem Header="E_xit" Command="{Binding ExitCommand}"/>
+                </MenuItem>
+            </Menu>
+            <StackPanel></StackPanel>
+        </DockPanel>
+        <ContentControl Grid.Row="1" prism:RegionManager.RegionName="ContentRegion"/>
     </Grid>
 </Window>
