@@ -21,6 +21,10 @@ namespace StudyAid.Gui
         protected override void ConfigureContainer()
         {
             base.ConfigureContainer();
+
+            Container.RegisterTypeForNavigation<AddBook>();
+            Container.RegisterTypeForNavigation<AddAuthor>();
+            Container.RegisterTypeForNavigation<FindBook>();
         }
     }
 }

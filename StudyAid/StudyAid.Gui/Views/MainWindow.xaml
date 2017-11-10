@@ -7,7 +7,7 @@
         prism:ViewModelLocator.AutoWireViewModel="True"
         xmlns:local="clr-namespace:StudyAid.Gui"
         mc:Ignorable="d"
-        Title="Study Aid" Height="350" Width="525">
+        Title="Study Aid" Width="1024" Height="768" >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -17,6 +17,10 @@
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_Program">
                     <MenuItem Header="E_xit" Command="{Binding ExitCommand}"/>
+                </MenuItem>
+                <MenuItem Header="_Book">
+                    <MenuItem Header="_Add" Command="{Binding NavigateCommand}" CommandParameter="AddBook"/>
+                    <MenuItem Header="_Find" Command="{Binding NavigateCommand}" CommandParameter="FindBook"/>
                 </MenuItem>
             </Menu>
             <StackPanel></StackPanel>
