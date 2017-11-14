@@ -15,7 +15,11 @@
         <TextBox Name="bookISBN" HorizontalAlignment="Stretch" Height="23" Margin="79,80,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="auto" Text="{Binding ISBN, UpdateSourceTrigger=PropertyChanged}"/>
         <Label Content="Author(s)" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top"/>
         <Button Content="Add Author" HorizontalAlignment="Right" Margin="206,120,10,0" VerticalAlignment="Top" Width="75" Command="{Binding NavigateCommand}" CommandParameter="AddAuthor" />
-        <DataGrid Height="300" Margin="10,150,10,0" VerticalAlignment="Top" Width="auto" HorizontalAlignment="Stretch" ItemsSource="{Binding Authors}"/>
+        <DataGrid Height="300" Margin="10,150,10,0" VerticalAlignment="Top" Width="auto" HorizontalAlignment="Stretch" AutoGenerateColumns="False" ItemsSource="{Binding Authors}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Button Content="Add Book" HorizontalAlignment="Right" Margin="206,270,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding AddBookCommand}"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="10,270,0,10" VerticalAlignment="Bottom" Width="75"/>
     </Grid>
