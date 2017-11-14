@@ -9,13 +9,16 @@ namespace StudyAid.Gui.ViewModels
     {
         private readonly IRegionManager _regionManager;
 
-        public DelegateCommand<string> NavigateCommand => new DelegateCommand<string>(Navigate);
+        public DelegateCommand<string> NavigateCommand { get; private set; }
 
-        public DelegateCommand ExitCommand => new DelegateCommand(Application.Current != null ? Application.Current.Shutdown : new System.Action(() => { }));
+        public DelegateCommand ExitCommand { get; private set; }
 
         public MainWindowViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
+
+            NavigateCommand =  new DelegateCommand<string>(Navigate);
+            ExitCommand = new DelegateCommand(Application.Current != null ? Application.Current.Shutdown : new System.Action(() => { }));
         }
 
         private void Navigate(string uri)

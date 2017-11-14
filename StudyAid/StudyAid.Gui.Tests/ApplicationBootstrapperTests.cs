@@ -46,7 +46,7 @@ namespace StudyAid.Gui.Tests
             {
                 regionManager.RequestNavigate("ContentRegion", view.Name);
 
-                Assert.IsTrue(regionManager.Regions.First().Views.Where(x => x.GetType() == view).Count()==1, $"{view.Name} wasn't registered for navigation, check ConfigureContainer");
+                Assert.IsTrue(regionManager.Regions.First().Views.Where(x => x.GetType() == view).Count()==1, $"{view.Name} wasn't registered for navigation, check ConfigureContainer.  Did you add any missing dependencies?");
             }
         }
     }
