@@ -150,11 +150,24 @@ namespace StudyAid.Gui.Tests.ViewModels
                 Assert.AreEqual(1, actualBook.Authors.Where(a => a.Name == expectedAuthor.Name).Count());
             }
         }
+
+        [Test]
+        public void DiscardBookCommandShouldClearAllFields()
+        {
+            var viewModel = CreatePopulatedViewModel();
+
+            viewModel.DiscardBookCommand.Execute();
+
+            Assert.AreEqual("", viewModel.Title);
+            Assert.AreEqual("", viewModel.ISBN);
+            Assert.AreEqual(0, viewModel.Authors.Count);
+        }
+
+
         const int DefaultAuthorId = 1;
-        const string DefaultAuthorName = "Deefault Test Author";
+        const string DefaultAuthorName = "Default Test Author";
         const string DefaultISBN = "123456789";
         const string DefaultTitle = "Default Test Title";
-
 
         private AddBookViewModel CreatePopulatedViewModel(Action<AddBookViewModel> postCreationAction = null, IBookService bookService = null)
         {

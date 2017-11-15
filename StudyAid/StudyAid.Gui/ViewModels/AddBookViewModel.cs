@@ -37,24 +37,33 @@ namespace StudyAid.Gui.ViewModels
         private readonly IBookService _bookService;
 
         public DelegateCommand AddBookCommand { get;} 
+        public DelegateCommand DiscardBookCommand { get; }
 
         public AddBookViewModel(IBookService bookService, IRegionManager regionManager) : base(regionManager)
         {
             _bookService = bookService;
 
-            AddBookCommand = new DelegateCommand(Execute, CanExecute).ObservesProperty(() => Title)
+            AddBookCommand = new DelegateCommand(AddBook, CanAddBook).ObservesProperty(() => Title)
                                                                      .ObservesProperty(() => ISBN);
+            DiscardBookCommand = new DelegateCommand(DiscardBook);
             _authors.CollectionChanged += (send, pcea) => AddBookCommand.RaiseCanExecuteChanged();
         }
 
-        private bool CanExecute()
+        private bool CanAddBook()
         {
             return !string.IsNullOrWhiteSpace(_title) && !string.IsNullOrWhiteSpace(_isbn) && _authors.Count> 0;
         }
 
-        private void Execute()
+        private void AddBook()
         {
             _bookService.AddBook(new Book() { Title = _title, ISBN = _isbn, Authors=_authors });
+        }
+
+        private void DiscardBook()
+        {
+            Title = String.Empty;
+            ISBN = String.Empty;
+            Authors.Clear();
         }
     }
 }
