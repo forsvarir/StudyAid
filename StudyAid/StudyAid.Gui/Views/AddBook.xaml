@@ -20,6 +20,7 @@
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Label Content="{Binding Status}" HorizontalAlignment="Left" Margin="10,470,0,0" VerticalAlignment="Top" Foreground="Red"/>
         <Button Content="Add Book" HorizontalAlignment="Right" Margin="206,270,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding AddBookCommand}"/>
         <Button Content="Discard" HorizontalAlignment="Left" Margin="10,270,0,10" VerticalAlignment="Bottom" Width="75" Command="{Binding DiscardBookCommand}"/>
     </Grid>

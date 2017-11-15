@@ -2,6 +2,7 @@
 using Prism.Regions;
 using StudyAid.Contracts;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace StudyAid.Gui.ViewModels
@@ -20,6 +21,13 @@ namespace StudyAid.Gui.ViewModels
         public string ISBN {
             get => _isbn;
             set => SetProperty(ref _isbn, value);
+        }
+
+        private string _status = null;
+        public string Status
+        {
+            get => _status;
+            private set => SetProperty(ref _status, value);
         }
 
         ObservableCollection<Author> _authors = new ObservableCollection<Author>();
@@ -51,7 +59,16 @@ namespace StudyAid.Gui.ViewModels
 
         private void AddBook()
         {
-            _bookService.AddBook(new Book() { Title = _title, ISBN = _isbn, Authors=_authors });
+            try
+            {
+                _bookService.AddBook(new Book() { Title = _title, ISBN = _isbn, Authors = new List<Author>(_authors) });
+
+                Status = $"Book \"{Title}\" added.";
+
+                DiscardBook();
+            } catch (Exception) {
+                Status = $"Failed to add book \"{Title}\".";
+            }
         }
 
         private void DiscardBook()

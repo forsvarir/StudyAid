@@ -149,14 +149,50 @@ namespace StudyAid.Gui.Tests.ViewModels
         }
 
         [Test]
+        public void AddBookCommandShouldClearFieldsAfterSuccessfulServiceCall()
+        {
+            var viewModel = CreatePopulatedViewModel();
+
+            viewModel.AddBookCommand.Execute();
+
+            Assert.AreEqual(String.Empty, viewModel.Title);
+            Assert.AreEqual(String.Empty, viewModel.ISBN);
+            Assert.AreEqual(0, viewModel.Authors.Count);
+        }
+
+        [Test]
+        public void AddBookCommandShouldUpdateStatusAfterSuccessfulServiceCall()
+        {
+            var viewModel = CreatePopulatedViewModel();
+
+            viewModel.AddBookCommand.Execute();
+
+            Assert.AreEqual($@"Book ""{DefaultTitle}"" added.", viewModel.Status);
+        }
+
+        [Test]
+        public void AddBookCommandShouldUpdateStatusAfterFailedServiceCall()
+        {
+            var serviceMock = new Mock<IBookService>();
+
+            serviceMock.Setup(x => x.AddBook(It.IsAny<Book>())).Throws(new Exception());
+
+            var viewModel = CreatePopulatedViewModel(null, serviceMock.Object);
+
+            viewModel.AddBookCommand.Execute();
+
+            Assert.AreEqual($@"Failed to add book ""{DefaultTitle}"".", viewModel.Status);
+        }
+
+        [Test]
         public void DiscardBookCommandShouldClearAllFields()
         {
             var viewModel = CreatePopulatedViewModel();
 
             viewModel.DiscardBookCommand.Execute();
 
-            Assert.AreEqual("", viewModel.Title);
-            Assert.AreEqual("", viewModel.ISBN);
+            Assert.AreEqual(String.Empty, viewModel.Title);
+            Assert.AreEqual(String.Empty, viewModel.ISBN);
             Assert.AreEqual(0, viewModel.Authors.Count);
         }
 
@@ -168,7 +204,7 @@ namespace StudyAid.Gui.Tests.ViewModels
 
         private AddBookViewModel CreatePopulatedViewModel(Action<AddBookViewModel> postCreationAction = null, IBookService bookService = null)
         {
-            var bookVM = new AddBookViewModel (bookService, new Mock<IRegionManager>().Object)
+            var bookVM = new AddBookViewModel (bookService ?? new Mock<IBookService>().Object, new Mock<IRegionManager>().Object)
             {
                 Title = DefaultTitle,
                 ISBN = DefaultISBN,
