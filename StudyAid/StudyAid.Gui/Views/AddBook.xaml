@@ -21,6 +21,6 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Add Book" HorizontalAlignment="Right" Margin="206,270,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding AddBookCommand}"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="10,270,0,10" VerticalAlignment="Bottom" Width="75"/>
+        <Button Content="Discard" HorizontalAlignment="Left" Margin="10,270,0,10" VerticalAlignment="Bottom" Width="75" Command="{Binding DiscardBookCommand}"/>
     </Grid>
 </UserControl>

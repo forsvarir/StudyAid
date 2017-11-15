@@ -142,7 +142,7 @@ namespace StudyAid.Gui.Tests.ViewModels
             Assert.AreEqual(expectedBook.Title, actualBook.Title);
             Assert.AreEqual(expectedBook.ISBN, actualBook.ISBN);
             Assert.AreEqual(expectedBook.BookId, actualBook.BookId);
-            Assert.AreEqual(expectedBook.Authors.Count, actualBook.Authors.Count);
+            Assert.AreEqual(expectedBook.Authors.Count, actualBook.Authors.Count, "Unexpected number of authors!");
 
             foreach(var expectedAuthor in expectedBook.Authors)
             {
@@ -157,7 +157,7 @@ namespace StudyAid.Gui.Tests.ViewModels
 
         private AddBookViewModel CreatePopulatedViewModel(Action<AddBookViewModel> postCreationAction = null, IBookService bookService = null)
         {
-            var book = new AddBookViewModel (bookService, null)
+            var bookVM = new AddBookViewModel (bookService, null)
             {
                 Title = DefaultTitle,
                 ISBN = DefaultISBN,
@@ -166,9 +166,9 @@ namespace StudyAid.Gui.Tests.ViewModels
                          }
             };
 
-            postCreationAction?.Invoke(book);
+            postCreationAction?.Invoke(bookVM);
 
-            return book;
+            return bookVM;
         }
 
 

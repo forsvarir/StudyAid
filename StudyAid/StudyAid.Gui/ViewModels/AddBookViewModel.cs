@@ -37,7 +37,7 @@ namespace StudyAid.Gui.ViewModels
         private readonly IBookService _bookService;
         private readonly IRegionManager _regionManager;
 
-        public DelegateCommand AddBookCommand { get; set; }
+        public DelegateCommand AddBookCommand { get;} 
 
         public AddBookViewModel(IBookService bookService, IRegionManager regionManager)
         {
@@ -49,8 +49,6 @@ namespace StudyAid.Gui.ViewModels
             _authors.CollectionChanged += (send, pcea) => AddBookCommand.RaiseCanExecuteChanged();
 
             NavigateCommand = new DelegateCommand<string>(Navigate);
-
-            _authors.Add(new Author { Name = "My Temp Author" });
         }
 
         private bool CanExecute()
