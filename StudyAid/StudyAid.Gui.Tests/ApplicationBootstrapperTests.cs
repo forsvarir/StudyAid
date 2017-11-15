@@ -1,14 +1,10 @@
 ﻿using NUnit.Framework;
 using Prism.Regions;
-using StudyAid.Gui.ViewModels;
 using StudyAid.Gui.Views;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace StudyAid.Gui.Tests
 {

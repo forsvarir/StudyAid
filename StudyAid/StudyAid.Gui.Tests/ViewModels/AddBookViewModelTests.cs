@@ -5,10 +5,7 @@ using StudyAid.Contracts;
 using StudyAid.Gui.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StudyAid.Gui.Tests.ViewModels
 {

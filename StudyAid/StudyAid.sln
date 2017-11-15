@@ -1,16 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+VisualStudioVersion = 15.0.27004.2008
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyAid", "StudyAid\StudyAid.csproj", "{D21AE06C-EFCD-42F9-935A-96BB369A87C8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyAidTests", "StudyAidTests\StudyAidTests.csproj", "{83458258-79EE-4D98-A649-001F7DD6BA76}"
-	ProjectSection(ProjectDependencies) = postProject
-		{D21AE06C-EFCD-42F9-935A-96BB369A87C8} = {D21AE06C-EFCD-42F9-935A-96BB369A87C8}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyAid.TestHarness", "StudyAid.TestHarness\StudyAid.TestHarness.csproj", "{721E57A5-940D-4752-B82F-3D546A977C3C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D21AE06C-EFCD-42F9-935A-96BB369A87C8} = {D21AE06C-EFCD-42F9-935A-96BB369A87C8}
 	EndProjectSection
@@ -38,10 +33,6 @@ Global
 		{83458258-79EE-4D98-A649-001F7DD6BA76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83458258-79EE-4D98-A649-001F7DD6BA76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83458258-79EE-4D98-A649-001F7DD6BA76}.Release|Any CPU.Build.0 = Release|Any CPU
-		{721E57A5-940D-4752-B82F-3D546A977C3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{721E57A5-940D-4752-B82F-3D546A977C3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{721E57A5-940D-4752-B82F-3D546A977C3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{721E57A5-940D-4752-B82F-3D546A977C3C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{33C7C947-7C65-4C20-8B1F-605C3B1218B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{33C7C947-7C65-4C20-8B1F-605C3B1218B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33C7C947-7C65-4C20-8B1F-605C3B1218B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
