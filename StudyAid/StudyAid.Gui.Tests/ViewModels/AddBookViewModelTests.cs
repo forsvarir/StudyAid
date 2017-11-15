@@ -1,5 +1,6 @@
 ﻿using Moq;
 using NUnit.Framework;
+using Prism.Regions;
 using StudyAid.Contracts;
 using StudyAid.Gui.ViewModels;
 using System;
@@ -157,7 +158,7 @@ namespace StudyAid.Gui.Tests.ViewModels
 
         private AddBookViewModel CreatePopulatedViewModel(Action<AddBookViewModel> postCreationAction = null, IBookService bookService = null)
         {
-            var bookVM = new AddBookViewModel (bookService, null)
+            var bookVM = new AddBookViewModel (bookService, new Mock<IRegionManager>().Object)
             {
                 Title = DefaultTitle,
                 ISBN = DefaultISBN,

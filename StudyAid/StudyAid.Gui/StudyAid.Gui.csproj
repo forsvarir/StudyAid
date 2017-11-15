@@ -108,6 +108,7 @@
     <Compile Include="ApplicationBootstrapper.cs" />
     <Compile Include="ViewModels\AddBookViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\NavigableViewModelBase.cs" />
     <Compile Include="Views\AddAuthor.xaml.cs">
       <DependentUpon>AddAuthor.xaml</DependentUpon>
     </Compile>

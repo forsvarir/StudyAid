@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace StudyAid.Gui.ViewModels
 {
 
-    public class AddBookViewModel : BindableBase
+    public class AddBookViewModel : NavigableViewModelBase
     {
         private string _title = null;
         public string Title
@@ -35,20 +35,16 @@ namespace StudyAid.Gui.ViewModels
         }
 
         private readonly IBookService _bookService;
-        private readonly IRegionManager _regionManager;
 
         public DelegateCommand AddBookCommand { get;} 
 
-        public AddBookViewModel(IBookService bookService, IRegionManager regionManager)
+        public AddBookViewModel(IBookService bookService, IRegionManager regionManager) : base(regionManager)
         {
             _bookService = bookService;
-            _regionManager = regionManager;
 
             AddBookCommand = new DelegateCommand(Execute, CanExecute).ObservesProperty(() => Title)
                                                                      .ObservesProperty(() => ISBN);
             _authors.CollectionChanged += (send, pcea) => AddBookCommand.RaiseCanExecuteChanged();
-
-            NavigateCommand = new DelegateCommand<string>(Navigate);
         }
 
         private bool CanExecute()
@@ -60,13 +56,5 @@ namespace StudyAid.Gui.ViewModels
         {
             _bookService.AddBook(new Book() { Title = _title, ISBN = _isbn, Authors=_authors });
         }
-
-        public DelegateCommand<string> NavigateCommand { get; }
-        private void Navigate(string uri)
-        {
-            _regionManager.RequestNavigate("ContentRegion", uri);
-        }
-
-
     }
 }

@@ -5,25 +5,13 @@ using System.Windows;
 
 namespace StudyAid.Gui.ViewModels
 {
-    public class MainWindowViewModel : BindableBase
+    public class MainWindowViewModel : NavigableViewModelBase
     {
-        private readonly IRegionManager _regionManager;
-
-        public DelegateCommand<string> NavigateCommand { get; }
-
         public DelegateCommand ExitCommand { get; }
 
-        public MainWindowViewModel(IRegionManager regionManager)
+        public MainWindowViewModel(IRegionManager regionManager) : base(regionManager)
         {
-            _regionManager = regionManager;
-
-            NavigateCommand =  new DelegateCommand<string>(Navigate);
             ExitCommand = new DelegateCommand(Application.Current != null ? Application.Current.Shutdown : new System.Action(() => { }));
-        }
-
-        private void Navigate(string uri)
-        {
-            _regionManager.RequestNavigate("ContentRegion", uri);
         }
     }
 }
