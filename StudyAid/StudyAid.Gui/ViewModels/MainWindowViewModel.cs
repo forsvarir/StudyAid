@@ -9,9 +9,9 @@ namespace StudyAid.Gui.ViewModels
     {
         private readonly IRegionManager _regionManager;
 
-        public DelegateCommand<string> NavigateCommand { get; private set; }
+        public DelegateCommand<string> NavigateCommand { get; }
 
-        public DelegateCommand ExitCommand { get; private set; }
+        public DelegateCommand ExitCommand { get; }
 
         public MainWindowViewModel(IRegionManager regionManager)
         {

@@ -61,7 +61,7 @@ namespace StudyAid.Gui.ViewModels
             _bookService.AddBook(new Book() { Title = _title, ISBN = _isbn, Authors=_authors });
         }
 
-        public DelegateCommand<string> NavigateCommand { get; private set; }
+        public DelegateCommand<string> NavigateCommand { get; }
         private void Navigate(string uri)
         {
             _regionManager.RequestNavigate("ContentRegion", uri);
