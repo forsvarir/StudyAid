@@ -41,7 +41,7 @@ namespace StudyAid.Gui.Tests.ViewModels
 
             sut.NavigateCommand.Execute(expectedUri);
 
-            regionManagerMock.Verify(rm=>rm.RequestNavigate("ContentRegion", expectedUri));
+            regionManagerMock.Verify(rm=>rm.RequestNavigate(ContentRegions.MainContentRegion, expectedUri));
         }
     }
 }

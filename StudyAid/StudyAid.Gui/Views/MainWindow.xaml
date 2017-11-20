@@ -25,6 +25,6 @@
             </Menu>
             <StackPanel></StackPanel>
         </DockPanel>
-        <ContentControl Grid.Row="1" prism:RegionManager.RegionName="ContentRegion"/>
+        <ContentControl Grid.Row="1" prism:RegionManager.RegionName="MainContentRegion"/>
     </Grid>
 </Window>

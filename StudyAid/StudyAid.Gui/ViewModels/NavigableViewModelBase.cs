@@ -12,11 +12,7 @@ namespace StudyAid.Gui.ViewModels
 
         public NavigableViewModelBase(IRegionManager regionManager)
         {
-            if(null == regionManager)
-            {
-                throw new ArgumentNullException("regionManager");
-            }
-            _regionManager = regionManager;
+            _regionManager = regionManager ?? throw new ArgumentNullException("regionManager");
 
             NavigateCommand = new DelegateCommand<string>(Navigate);
         }
@@ -27,7 +23,7 @@ namespace StudyAid.Gui.ViewModels
             {
                 throw new ArgumentException("uri is required", "uri");
             }
-            _regionManager.RequestNavigate("ContentRegion", uri);
+            _regionManager.RequestNavigate(ContentRegions.MainContentRegion, uri);
         }
     }
 }

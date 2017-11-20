@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Prism.Regions;
+using StudyAid.Gui.ViewModels;
 using StudyAid.Gui.Views;
 using System;
 using System.Linq;
@@ -40,7 +41,7 @@ namespace StudyAid.Gui.Tests
 
             foreach(var view in nonWindowViews)
             {
-                regionManager.RequestNavigate("ContentRegion", view.Name);
+                regionManager.RequestNavigate(ContentRegions.MainContentRegion, view.Name);
 
                 Assert.IsTrue(regionManager.Regions.First().Views.Where(x => x.GetType() == view).Count()==1, $"{view.Name} wasn't registered for navigation, check ConfigureContainer.  Did you add any missing dependencies?");
             }
