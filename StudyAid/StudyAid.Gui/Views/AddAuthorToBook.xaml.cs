@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace StudyAid.Gui.Views
 {
     /// <summary>
-    /// Interaction logic for AddAuthor.xaml
+    /// Interaction logic for AddAuthorToBook.xaml
     /// </summary>
-    public partial class AddAuthor : UserControl
+    public partial class AddAuthorToBook : UserControl
     {
-        public AddAuthor()
+        public AddAuthorToBook()
         {
             InitializeComponent();
         }

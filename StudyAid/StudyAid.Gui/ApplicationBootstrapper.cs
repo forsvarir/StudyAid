@@ -27,7 +27,7 @@ namespace StudyAid.Gui
             Container.RegisterInstance<IBookService>(new BookService());
 
             Container.RegisterTypeForNavigation<AddBook>();
-            Container.RegisterTypeForNavigation<AddAuthor>();
+            Container.RegisterTypeForNavigation<AddAuthorToBook>();
             Container.RegisterTypeForNavigation<FindBook>();
         }
     }
