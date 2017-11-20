@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="ApplicationBootstrapperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AddAuthorToBookViewModelTests.cs" />
     <Compile Include="ViewModels\AddBookViewModelTests.cs" />
     <Compile Include="ViewModels\NavigableViewModelBaseTests.cs" />
   </ItemGroup>

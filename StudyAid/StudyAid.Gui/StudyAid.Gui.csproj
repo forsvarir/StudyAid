@@ -106,6 +106,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ApplicationBootstrapper.cs" />
+    <Compile Include="ViewModels\AddAuthorToBookViewModel.cs" />
     <Compile Include="ViewModels\AddBookViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\NavigableViewModelBase.cs" />
