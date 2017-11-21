@@ -5,6 +5,7 @@ using StudyAid.Contracts;
 using StudyAid.Gui.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace StudyAid.Gui.Tests.ViewModels
@@ -196,15 +197,49 @@ namespace StudyAid.Gui.Tests.ViewModels
             Assert.AreEqual(0, viewModel.Authors.Count);
         }
 
+        [TestCase("")]
+        [TestCase("  ")]
+        [TestCase(null)]
+        public void AddAuthorToBookShouldThrowOnNoUri(string uriValue)
+        {
+            var viewModel = CreatePopulatedViewModel();
+
+            var exception = Assert.Throws<ArgumentException>(() => viewModel.AddAuthorToBookCommand.Execute(uriValue));
+
+            Assert.AreEqual("uri", exception.ParamName);
+        }
+
+        [Test]
+        public void AddAuthorToBookCommandShouldAllowNavigationTargetToUpdateAuthors()
+        {
+            const string addAuthorUri = "AddAuthorToBook!";
+            const string knownAuthorName = "Known Author";
+            const int knownAuthorId = 1234;
+            var regionManagerMock = new Mock<IRegionManager>();
+
+            regionManagerMock.Setup(rm => rm.RequestNavigate(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<NavigationParameters>()))
+                             .Callback<string, string, NavigationParameters>((a,b,c)=>((ObservableCollection<Author>)c["authors"]).Add(new Author { Name = knownAuthorName, AuthorId = knownAuthorId}));
+
+            var viewModel = CreateEmptyViewModel(regionManager: regionManagerMock.Object);
+
+            viewModel.AddAuthorToBookCommand.Execute(addAuthorUri);
+
+            Assert.AreEqual(1, viewModel.Authors.Count);
+            Assert.AreEqual(knownAuthorId, viewModel.Authors[0].AuthorId);
+            Assert.AreEqual(knownAuthorName, viewModel.Authors[0].Name);
+        }
+
 
         const int DefaultAuthorId = 1;
         const string DefaultAuthorName = "Default Test Author";
         const string DefaultISBN = "123456789";
         const string DefaultTitle = "Default Test Title";
 
-        private AddBookViewModel CreatePopulatedViewModel(Action<AddBookViewModel> postCreationAction = null, IBookService bookService = null)
+        private AddBookViewModel CreatePopulatedViewModel(Action<AddBookViewModel> postCreationAction = null,
+                                                          IBookService bookService = null,
+                                                          IRegionManager regionManager = null)
         {
-            var bookVM = new AddBookViewModel (bookService ?? new Mock<IBookService>().Object, new Mock<IRegionManager>().Object)
+            var bookVM = new AddBookViewModel (bookService ?? new Mock<IBookService>().Object, regionManager ?? new Mock<IRegionManager>().Object)
             {
                 Title = DefaultTitle,
                 ISBN = DefaultISBN,
@@ -217,6 +252,17 @@ namespace StudyAid.Gui.Tests.ViewModels
 
             return bookVM;
         }
+        private AddBookViewModel CreateEmptyViewModel(Action<AddBookViewModel> postCreationAction = null,
+                                                          IBookService bookService = null,
+                                                          IRegionManager regionManager = null)
+        {
+            var bookVM = new AddBookViewModel(bookService ?? new Mock<IBookService>().Object, regionManager ?? new Mock<IRegionManager>().Object);
+
+            postCreationAction?.Invoke(bookVM);
+
+            return bookVM;
+        }
+
 
 
     }

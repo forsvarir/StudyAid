@@ -41,6 +41,7 @@ namespace StudyAid.Gui.ViewModels
 
         public DelegateCommand AddBookCommand { get;} 
         public DelegateCommand DiscardBookCommand { get; }
+        public DelegateCommand<string> AddAuthorToBookCommand { get; }
 
         public AddBookViewModel(IBookService bookService, IRegionManager regionManager) : base(regionManager)
         {
@@ -49,7 +50,22 @@ namespace StudyAid.Gui.ViewModels
             AddBookCommand = new DelegateCommand(AddBook, CanAddBook).ObservesProperty(() => Title)
                                                                      .ObservesProperty(() => ISBN);
             DiscardBookCommand = new DelegateCommand(DiscardBook);
+            AddAuthorToBookCommand = new DelegateCommand<string>(AddBookToAuthor);
+
             _authors.CollectionChanged += (send, pcea) => AddBookCommand.RaiseCanExecuteChanged();
+        }
+
+        private void AddBookToAuthor(string uri)
+        {
+            NavigationParameters np = new NavigationParameters();
+            np.Add("authors", _authors);
+
+            if (string.IsNullOrWhiteSpace(uri))
+            {
+                throw new ArgumentException("uri is required", "uri");
+            }
+
+            RegionManager.RequestNavigate(ContentRegions.MainContentRegion, uri, np);
         }
 
         private bool CanAddBook()

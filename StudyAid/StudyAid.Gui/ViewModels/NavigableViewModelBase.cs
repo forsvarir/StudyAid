@@ -7,12 +7,12 @@ namespace StudyAid.Gui.ViewModels
 {
     public class NavigableViewModelBase : BindableBase
     {
-        private readonly IRegionManager _regionManager;
+        protected IRegionManager RegionManager { get; }
         public DelegateCommand<string> NavigateCommand { get; }
 
         public NavigableViewModelBase(IRegionManager regionManager)
         {
-            _regionManager = regionManager ?? throw new ArgumentNullException("regionManager");
+            RegionManager = regionManager ?? throw new ArgumentNullException("regionManager");
 
             NavigateCommand = new DelegateCommand<string>(Navigate);
         }
@@ -23,7 +23,7 @@ namespace StudyAid.Gui.ViewModels
             {
                 throw new ArgumentException("uri is required", "uri");
             }
-            _regionManager.RequestNavigate(ContentRegions.MainContentRegion, uri);
+            RegionManager.RequestNavigate(ContentRegions.MainContentRegion, uri);
         }
     }
 }
