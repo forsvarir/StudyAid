@@ -25,18 +25,13 @@ namespace StudyAidTests.Services
             return book;
         }
 
-        [Test]
-        public void BookServiceShouldBeConstructable()
-        {
-            var service = CreateBookService();
-            Assert.IsNotNull(service);
-        }
-
         private static IBookService CreateBookService()
         {
             return new BookService();
         }
 
+        // BookId is updated automatically by the EF when an item is inserted.
+        // This integration test confirms that no errors have been thrown.
         [Test]
         public void InsertBookShouldUpdateBookId()
         {
@@ -47,72 +42,6 @@ namespace StudyAidTests.Services
             var insertedBook = service.AddBook(newBook);
 
             Assert.That(newBook.BookId != 0, ()=>"BookId should be updated by AddBook");
-        }
-
-        [Test]
-        public void InsertBookShouldFailWhenBookIsNull()
-        {
-            var service = new BookService();
-
-            Assert.That(() => service.AddBook(null),
-            Throws.Exception
-              .TypeOf<ArgumentNullException>());
-        }
-
-
-        [TestCase("")]
-        [TestCase(null)]
-        public void InsertBookShouldFailWhenTitleIsNotPresent(string titleToTest)
-        {
-            var newBook = CreateBook((book) => book.Title = titleToTest);
-
-            var service = new BookService();
-
-            Assert.That(() => service.AddBook(newBook),
-            Throws.Exception
-              .TypeOf<ArgumentException>()
-              .With.Message.Contains("Title"));
-        }
-
-        [TestCase("")]
-        [TestCase(null)]
-        public void InsertBookShouldFailWhenISBNIsNotPresent(string isbnToTest)
-        {
-            // We are assuming that all books have an ISBN.  This may require revisited if that's not the case.
-            var newBook = CreateBook((book) => book.ISBN = isbnToTest);
-
-            var service = new BookService();
-
-            Assert.That(() => service.AddBook(newBook),
-            Throws.Exception
-              .TypeOf<ArgumentException>()
-              .With.Message.Contains("ISBN"));
-        }
-
-        [Test]
-        public void InsertBookShouldFailWhenNoAuthorsProvided()
-        {
-            var newBook = CreateBook((book) => book.Authors.Clear());
-
-            var service = new BookService();
-
-            Assert.That(() => service.AddBook(newBook),
-            Throws.Exception
-              .TypeOf<ArgumentException>()
-              .With.Message.Contains("author"));
-        }
-
-        [Test]
-        public void InsertBookShouldFailWhenNullAuthorsProvided()
-        {
-            var newBook = CreateBook((book) => book.Authors = null);
-
-            var service = new BookService();
-
-            Assert.That(() => service.AddBook(newBook),
-            Throws.Exception
-              .TypeOf<ArgumentException>()
-              .With.Message.Contains("author"));
         }
 
         // TODO: Validate that inserted book has actually been inserted

@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\Author.cs" />
+    <Compile Include="Contracts\Book.cs" />
     <Compile Include="Contracts\IBookService.cs" />
     <Compile Include="Data\BookContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

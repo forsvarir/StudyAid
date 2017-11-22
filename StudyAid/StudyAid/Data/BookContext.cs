@@ -3,7 +3,15 @@ using System.Data.Entity;
 
 namespace StudyAid.Data
 {
-    public class BookContext : DbContext
+    public interface IBookContext
+    {
+        DbSet<Book> Books { get; }
+        DbSet<Author> Authors { get; }
+
+        int SaveChanges();
+    }
+
+    public class BookContext : DbContext, IBookContext
     {
         public BookContext() : base("BookConnection") { }
 

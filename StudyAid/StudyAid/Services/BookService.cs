@@ -6,7 +6,13 @@ namespace StudyAid.Services
 {
     public class BookService : IBookService
     {
-        BookContext _bookContext = new BookContext();
+        IBookContext _bookContext = new BookContext();
+
+        public BookService(IBookContext bookContext = null)
+        {
+            _bookContext = bookContext ?? new BookContext();
+
+        }
 
         public Book AddBook(Book newBook)
         {
