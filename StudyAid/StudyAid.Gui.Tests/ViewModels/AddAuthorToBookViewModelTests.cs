@@ -31,21 +31,6 @@ namespace StudyAid.Gui.Tests.ViewModels
             Assert.AreEqual(expectedValue, viewModel.Name);
         }
 
-        const string DefaultAuthorName = "Unknown Individual";
-
-        private AddAuthorToBookViewModel CreatePopulatedViewModel(Action<AddAuthorToBookViewModel> postCreationAction = null, ObservableCollection<Author> authors = null)
-        {
-            var vm = new AddAuthorToBookViewModel(new Moq.Mock<Prism.Regions.IRegionManager>().Object) { Name = DefaultAuthorName };
-
-            postCreationAction?.Invoke(vm);
-
-            var populatedNavigationContext = CreateNavigationContext(true, authors ?? new ObservableCollection<Author>());
-
-            vm.OnNavigatedTo(populatedNavigationContext);
-
-
-            return vm;
-        }
 
         [Test]
         public void AddAuthorCommandShouldBeDisabledWithEmptyName()
@@ -113,13 +98,56 @@ namespace StudyAid.Gui.Tests.ViewModels
             Assert.AreEqual(0, authors[0].AuthorId);
         }
 
-        private NavigationContext CreateNavigationContext(bool passParameters, ObservableCollection<Author> authors = null)
+        [Test]
+        public void AddAuthorCommandShouldClearFields()
+        {
+            var viewModel = CreatePopulatedViewModel();
+
+            viewModel.AddAuthorCommand.Execute();
+
+            Assert.AreEqual("", viewModel.Name);
+        }
+
+        [Test]
+        public void AddAuthorCommandShouldNavigateToPreviousView()
+        {
+            var regionNavigationJournalMock = new Mock<IRegionNavigationJournal>();
+
+            regionNavigationJournalMock.SetupGet(x => x.CanGoBack).Returns(true);
+            regionNavigationJournalMock.Setup(x => x.GoBack()).Verifiable();
+
+            var viewModel = CreatePopulatedViewModel(navigationMockSetup: (rns)=> rns.SetupGet(x => x.Journal).Returns(regionNavigationJournalMock.Object));
+
+            viewModel.AddAuthorCommand.Execute();
+
+            regionNavigationJournalMock.Verify();
+        }
+
+        const string DefaultAuthorName = "Unknown Individual";
+
+        private AddAuthorToBookViewModel CreatePopulatedViewModel(Action<AddAuthorToBookViewModel> postCreationAction = null, ObservableCollection<Author> authors = null, Action<Mock<IRegionNavigationService>> navigationMockSetup = null)
+        {
+            var vm = new AddAuthorToBookViewModel(new Moq.Mock<Prism.Regions.IRegionManager>().Object) { Name = DefaultAuthorName };
+
+            postCreationAction?.Invoke(vm);
+
+            var populatedNavigationContext = CreateNavigationContext(true, authors ?? new ObservableCollection<Author>(), navigationMockSetup);
+
+            vm.OnNavigatedTo(populatedNavigationContext);
+
+
+            return vm;
+        }
+
+        private NavigationContext CreateNavigationContext(bool passParameters, ObservableCollection<Author> authors = null, Action<Mock<IRegionNavigationService>> navigationMockSetup = null)
         {
             // Mocks are required, otherwise NavigationContext fails to construct properly and the
             // navigation parameters aren't copied across.
             var regionMock = new Mock<IRegion>();
             var regionNavigationServiceMock = new Mock<IRegionNavigationService>();
             regionNavigationServiceMock.SetupGet<IRegion>(x => x.Region).Returns(regionMock.Object);
+
+            navigationMockSetup?.Invoke(regionNavigationServiceMock);
 
 
             var np = new NavigationParameters

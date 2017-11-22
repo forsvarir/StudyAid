@@ -15,7 +15,7 @@ namespace StudyAid.Gui.ViewModels
         }
 
         ObservableCollection<Author> _authors;
-        private IRegionNavigationJournal _rnj = null;
+        private IRegionNavigationJournal _navigationJournal = null;
 
         public DelegateCommand AddAuthorCommand { get; }
 
@@ -33,13 +33,14 @@ namespace StudyAid.Gui.ViewModels
         private void AddAuthor()
         {
             _authors.Add(new Author { Name = _name });
-            _rnj?.GoBack();
+            Name = string.Empty;
+            _navigationJournal?.GoBack();
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             _authors = navigationContext.Parameters["authors"] as ObservableCollection<Author>;
-            _rnj = navigationContext?.NavigationService.Journal;
+            _navigationJournal = navigationContext?.NavigationService.Journal;
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
