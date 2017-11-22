@@ -1,6 +1,8 @@
 ﻿using StudyAid.Contracts;
 using StudyAid.Data;
+using System.Linq;
 using System;
+using System.Collections.Generic;
 
 namespace StudyAid.Services
 {
@@ -38,6 +40,11 @@ namespace StudyAid.Services
             _bookContext.SaveChanges();
 
             return newBook;
+        }
+
+        public IEnumerable<Book> FindBooks(string searchString)
+        {
+            return _bookContext.Books.Where(book => book.Title.Contains(searchString)).AsEnumerable();
         }
     }
 }

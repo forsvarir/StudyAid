@@ -21,6 +21,12 @@ namespace StudyAidTests.Helpers
             _query = _data.AsQueryable();
         }
 
+        public TestDbSet(IEnumerable<TEntity> initialCollection)
+        {
+            _data = null != initialCollection ? new ObservableCollection<TEntity>(initialCollection) : new ObservableCollection<TEntity>();
+            _query = _data.AsQueryable();
+        }
+
         public override TEntity Add(TEntity item)
         {
             _data.Add(item);

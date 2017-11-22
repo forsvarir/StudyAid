@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using StudyAidTests.Helpers;
+using System.Linq;
 
 namespace StudyAidTests.Services
 {
@@ -104,10 +105,49 @@ namespace StudyAidTests.Services
               .With.Message.Contains("author"));
         }
 
+        [Test]
+        public void ShouldBeAbleToFindBookByExactTitle()
+        {
+            const string expectedBookTitle = searchableBookTitle;
+            var service = CreateBookService();
+
+            var books = service.FindBooks(expectedBookTitle);
+            Assert.IsNotNull(books);
+
+            var booksList = books.ToList();
+
+            Assert.AreEqual(1, booksList.Count);
+            Assert.AreEqual(expectedBookTitle, booksList[0].Title);
+        }
+
+        [Test]
+        public void ShouldBeAbleToFindBookByPartialTitle()
+        {
+            const string textToSearchWith = "ook";
+            const string expectedBookTitle = "Book to Find";
+            var service = CreateBookService();
+
+            var books = service.FindBooks(textToSearchWith);
+            Assert.IsNotNull(books);
+
+            var booksList = books.ToList();
+
+            Assert.AreEqual(1, booksList.Count);
+            Assert.AreEqual(expectedBookTitle, booksList[0].Title);
+        }
+
         private static IBookService CreateBookService()
         {
-            return new BookService(new StubbedBookContext());
+            List<Book> initialBookList = new List<Book> { new Book { Title = searchableBookTitle, ISBN = searchableISBN, BookId = searchableBookId } };
+
+            return new BookService(new StubbedBookContext(initialBookList));
         }
+
+        const string searchableBookTitle = "Book to Find";
+        const string searchableISBN = "1234567";
+        const int searchableBookId = 5;
+
+        
     }
 
     class StubbedBookContext : IBookContext
@@ -116,10 +156,10 @@ namespace StudyAidTests.Services
 
         public DbSet<Author> Authors { get; }
 
-        public StubbedBookContext()
+        public StubbedBookContext(IEnumerable<Book> initialBookList = null, IEnumerable<Author> initialAuthorList = null)
         {
-            Books = new TestDbSet<Book>();
-            Authors = new TestDbSet<Author>();
+            Books = new TestDbSet<Book>(initialBookList);
+            Authors = new TestDbSet<Author>(initialAuthorList);
         }
 
         public int SaveChanges()
