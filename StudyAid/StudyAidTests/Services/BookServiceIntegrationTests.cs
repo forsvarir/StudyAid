@@ -3,6 +3,7 @@ using StudyAid.Contracts;
 using StudyAid.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace StudyAidTests.Services
 {
@@ -42,6 +43,18 @@ namespace StudyAidTests.Services
             var insertedBook = service.AddBook(newBook);
 
             Assert.That(newBook.BookId != 0, ()=>"BookId should be updated by AddBook");
+        }
+
+        // Note: This test will fail if it is run against a clean database.
+        [Test]
+        public void FindBooksShouldReturnAtLeastOneBook()
+        {
+            var service = new BookService();
+
+            var foundBooks = service.FindBooks("").ToList();
+
+            Assert.Greater(foundBooks.Count, 0, "Expected to find at least one book");
+            Assert.Greater(foundBooks[0].BookId, 0, "Books fetched should have a book id");
         }
 
         // TODO: Validate that inserted book has actually been inserted
