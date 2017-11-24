@@ -44,7 +44,11 @@ namespace StudyAid.Services
 
         public IEnumerable<Book> FindBooks(string searchString)
         {
-            return _bookContext.Books.Where(book => book.Title.ToUpper().Contains(searchString.ToUpper())).AsEnumerable();
+            if(null == searchString)
+            {
+                throw new ArgumentNullException("searchString");
+            }
+            return _bookContext.Books.Where(book => searchString == String.Empty || book.Title.ToUpper().Contains(searchString.ToUpper())).AsEnumerable();
         }
     }
 }

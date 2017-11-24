@@ -16,7 +16,7 @@ namespace StudyAid.Gui.ViewModels
 
     public class FindBookViewModel : NavigableViewModelBase
     {
-        private string _textToFind = null;
+        private string _textToFind = String.Empty;
         private IBookService _bookService;
 
         public string TextToFind

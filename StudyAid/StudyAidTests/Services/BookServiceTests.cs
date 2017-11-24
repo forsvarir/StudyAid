@@ -180,6 +180,15 @@ namespace StudyAidTests.Services
             AssertContainsAllBooks(booksList);
         }
 
+        [Test]
+        public void NullSearchTextShouldThrow()
+        {
+            var service = CreateBookService();
+
+            var exception = Assert.Throws<ArgumentNullException>(()=>service.FindBooks(null));
+            Assert.AreEqual("searchString", exception.ParamName);
+        }
+
 
         private static IBookService CreateBookService()
         {
